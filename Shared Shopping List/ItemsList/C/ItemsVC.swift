@@ -1,19 +1,21 @@
 import UIKit
 import CoreData
 
-class StoresVC: UIViewController {
+class ItemsVC: UIViewController {
     
+    //protocol?
+    var itemsParent: Store?
     private let pesistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-    private let fetchedResultController = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.storeFetchedResultsController
+    private var fetchedResultController: NSFetchedResultsController<Item>?
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - IBActions
-    @IBAction func btnActionAddStore(_ sender: Any) {
-        presentCreateSroreAlert()
+    @IBAction func btnActionAddItem(_ sender: Any) {
+        presentCreateItemAlert()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
@@ -27,9 +29,10 @@ class StoresVC: UIViewController {
     }
     
     private func setUpFetchedResultController() {
-        fetchedResultController.delegate = self
+        fetchedResultController = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.getItemsFetchedResultsController(withRelationship: itemsParent!)
+        fetchedResultController?.delegate = self
         do {
-            try fetchedResultController.performFetch()
+            try fetchedResultController?.performFetch()
         } catch {
             let fetchError = error as NSError
             print("Unable to Perform Fetch Request")
@@ -38,33 +41,34 @@ class StoresVC: UIViewController {
     }
 }
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
-extension StoresVC: UITableViewDelegate, UITableViewDataSource {
+    // MARK: - UITableViewDelegate, UITableViewDataSource
+extension ItemsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let stores = fetchedResultController.fetchedObjects else {return 0}
-        return stores.count
+        guard let items = fetchedResultController?.fetchedObjects else {return 0}
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // TODO: - investigate ! removal options
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StoreCell", for: indexPath) as! StoreCell
-        let store = fetchedResultController.object(at: indexPath)
-        let cellTitle = store.title!
-        cell.configureCell(title: cellTitle)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
+        let item = fetchedResultController?.object(at: indexPath)
+        print(item)
+        let cellTitle = item?.title!
+        cell.configureCell(title: cellTitle!)
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let store = fetchedResultController.object(at: indexPath)
-            store.managedObjectContext?.delete(store)
+            let item = fetchedResultController?.object(at: indexPath)
+            item?.managedObjectContext?.delete(item!)
         }
     }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
-extension StoresVC: NSFetchedResultsControllerDelegate {
+extension ItemsVC: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
@@ -93,31 +97,20 @@ extension StoresVC: NSFetchedResultsControllerDelegate {
 }
 
 //MARK: - Add Store
-extension StoresVC {
-    func presentCreateSroreAlert() {
-        let alert = UIAlertController(title: "Enter Store name", message: "", preferredStyle: .alert)
+extension ItemsVC {
+    func presentCreateItemAlert() {
+        let alert = UIAlertController(title: "Enter Item name", message: "", preferredStyle: .alert)
         alert.addTextField { textField in
-            textField.placeholder = "Store name"
+            textField.placeholder = "Item name"
         }
         let createStore = UIAlertAction(title: "Create", style: .default) { [weak alert, unowned self] _ in
             guard let alert = alert, let textFieldName = alert.textFields?.first else { return }
             let title = textFieldName.text!
-            self.pesistentContainer.createStore(title: title)
+            self.pesistentContainer.createItem(title: title, store: self.itemsParent!)
         }
         let dismissAlert = UIAlertAction(title: "Cancel", style: .cancel)
         alert.addAction(dismissAlert)
         alert.addAction(createStore)
         self.present(alert, animated: true, completion: nil)
-    }
-}
-
-// MARK: - Navigation
-extension StoresVC {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowItemsList" {
-            guard let storeIndexPath = tableView.indexPathForSelectedRow else {return}
-            let destination = segue.destination as? ItemsVC
-            destination?.itemsParent = fetchedResultController.object(at: storeIndexPath)
-        }
     }
 }
