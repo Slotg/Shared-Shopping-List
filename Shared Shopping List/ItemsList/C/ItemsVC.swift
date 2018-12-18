@@ -3,10 +3,11 @@ import CoreData
 
 class ItemsVC: UIViewController {
     
+    // MARK: - Properties
     //protocol?
     var itemsParent: Store?
-    private let pesistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-    private var fetchedResultController: NSFetchedResultsController<Item>?
+    private let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    private lazy var fetchedResultController = persistentContainer.getItemsFetchedResultsController(withRelationship: itemsParent!)
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -16,6 +17,7 @@ class ItemsVC: UIViewController {
         presentCreateItemAlert()
     }
 
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
@@ -29,10 +31,9 @@ class ItemsVC: UIViewController {
     }
     
     private func setUpFetchedResultController() {
-        fetchedResultController = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.getItemsFetchedResultsController(withRelationship: itemsParent!)
-        fetchedResultController?.delegate = self
+        fetchedResultController.delegate = self
         do {
-            try fetchedResultController?.performFetch()
+            try fetchedResultController.performFetch()
         } catch {
             let fetchError = error as NSError
             print("Unable to Perform Fetch Request")
@@ -45,24 +46,23 @@ class ItemsVC: UIViewController {
 extension ItemsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let items = fetchedResultController?.fetchedObjects else {return 0}
+        guard let items = fetchedResultController.fetchedObjects else {return 0}
         return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // TODO: - investigate ! removal options
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ItemCell
-        let item = fetchedResultController?.object(at: indexPath)
-        print(item)
-        let cellTitle = item?.title!
-        cell.configureCell(title: cellTitle!)
+        let item = fetchedResultController.object(at: indexPath)
+        let cellTitle = item.title!
+        cell.configureCell(title: cellTitle)
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let item = fetchedResultController?.object(at: indexPath)
-            item?.managedObjectContext?.delete(item!)
+            let item = fetchedResultController.object(at: indexPath)
+            item.managedObjectContext?.delete(item)
         }
     }
 }
@@ -106,7 +106,7 @@ extension ItemsVC {
         let createStore = UIAlertAction(title: "Create", style: .default) { [weak alert, unowned self] _ in
             guard let alert = alert, let textFieldName = alert.textFields?.first else { return }
             let title = textFieldName.text!
-            self.pesistentContainer.createItem(title: title, store: self.itemsParent!)
+            self.persistentContainer.createItem(title: title, store: self.itemsParent!)
         }
         let dismissAlert = UIAlertAction(title: "Cancel", style: .cancel)
         alert.addAction(dismissAlert)

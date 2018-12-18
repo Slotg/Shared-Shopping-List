@@ -3,8 +3,9 @@ import CoreData
 
 class StoresVC: UIViewController {
     
-    private let pesistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-    private let fetchedResultController = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.storeFetchedResultsController
+    // MARK: - Properties
+    private let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    private lazy var fetchedResultController = persistentContainer.getStoresFetchedResultsController()
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -14,6 +15,7 @@ class StoresVC: UIViewController {
         presentCreateSroreAlert()
     }
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
@@ -102,7 +104,7 @@ extension StoresVC {
         let createStore = UIAlertAction(title: "Create", style: .default) { [weak alert, unowned self] _ in
             guard let alert = alert, let textFieldName = alert.textFields?.first else { return }
             let title = textFieldName.text!
-            self.pesistentContainer.createStore(title: title)
+            self.persistentContainer.createStore(title: title)
         }
         let dismissAlert = UIAlertAction(title: "Cancel", style: .cancel)
         alert.addAction(dismissAlert)

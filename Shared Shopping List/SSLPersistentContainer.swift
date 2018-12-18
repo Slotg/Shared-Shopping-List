@@ -22,10 +22,16 @@ class SSLPersistentContainer: NSPersistentContainer {
         return fetchedResultsController
     }()
     
+    func getStoresFetchedResultsController() -> NSFetchedResultsController<Store> {
+        let fetchRequest: NSFetchRequest<Store> = Store.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchedResultsController
+    }
+    
     func getItemsFetchedResultsController(withRelationship parent: NSManagedObject) -> NSFetchedResultsController<Item> {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-//        fetchRequest.predicate = NSPredicate(format: "stores == %@", parent)
-//        var fetchedResultsController =
+        fetchRequest.predicate = NSPredicate(format: "ANY stores = %@", parent)
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
         return fetchedResultsController
