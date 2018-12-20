@@ -50,7 +50,9 @@ extension StoresVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // TODO: - investigate ! removal options
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StoreCell", for: indexPath) as! StoreCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: StoreCell.reuseIdentifier, for: indexPath) as? StoreCell else {
+            fatalError("Unexpected Index Path")
+        }
         let store = fetchedResultController.object(at: indexPath)
         let cellTitle = store.title!
         cell.configureCell(title: cellTitle)
@@ -119,7 +121,7 @@ extension StoresVC {
         if segue.identifier == "ShowItemsList" {
             guard let storeIndexPath = tableView.indexPathForSelectedRow else {return}
             let destination = segue.destination as? ItemsVC
-            destination?.itemsParent = fetchedResultController.object(at: storeIndexPath)
+            destination?.itemsCategory = fetchedResultController.object(at: storeIndexPath)
         }
     }
 }

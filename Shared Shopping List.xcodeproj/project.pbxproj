@@ -10,6 +10,7 @@
 		52205B7221C7708100B12865 /* ItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52205B7121C7708100B12865 /* ItemsVC.swift */; };
 		52205B7421C770DA00B12865 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52205B7321C770DA00B12865 /* ItemCell.swift */; };
 		52AB19FB21C5692D0001BFDE /* SSLPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AB19FA21C5692D0001BFDE /* SSLPersistentContainer.swift */; };
+		52DE848721CB5FE2009EF111 /* ItemsAllTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DE848621CB5FE2009EF111 /* ItemsAllTVC.swift */; };
 		8418BD0421B0FD1F0095892E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418BD0321B0FD1F0095892E /* AppDelegate.swift */; };
 		8418BD0C21B0FD1F0095892E /* Shared_Shopping_List.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8418BD0A21B0FD1F0095892E /* Shared_Shopping_List.xcdatamodeld */; };
 		8418BD0E21B0FD1F0095892E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8418BD0D21B0FD1F0095892E /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 		52205B7121C7708100B12865 /* ItemsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsVC.swift; sourceTree = "<group>"; };
 		52205B7321C770DA00B12865 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		52AB19FA21C5692D0001BFDE /* SSLPersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLPersistentContainer.swift; sourceTree = "<group>"; };
+		52DE848621CB5FE2009EF111 /* ItemsAllTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsAllTVC.swift; sourceTree = "<group>"; };
 		8418BD0021B0FD1F0095892E /* Shared Shopping List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shared Shopping List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8418BD0321B0FD1F0095892E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8418BD0821B0FD1F0095892E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -45,13 +47,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		52205B6D21C7702600B12865 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		52205B6E21C7702800B12865 /* ItemsList */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +72,22 @@
 			path = V;
 			sourceTree = "<group>";
 		};
+		52DE848421CB5F9E009EF111 /* ItemsAllList */ = {
+			isa = PBXGroup;
+			children = (
+				52DE848521CB5FB2009EF111 /* C */,
+			);
+			path = ItemsAllList;
+			sourceTree = "<group>";
+		};
+		52DE848521CB5FB2009EF111 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				52DE848621CB5FE2009EF111 /* ItemsAllTVC.swift */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
 		8418BCF721B0FD1F0095892E = {
 			isa = PBXGroup;
 			children = (
@@ -96,8 +107,8 @@
 		8418BD0221B0FD1F0095892E /* Shared Shopping List */ = {
 			isa = PBXGroup;
 			children = (
+				52DE848421CB5F9E009EF111 /* ItemsAllList */,
 				52205B6E21C7702800B12865 /* ItemsList */,
-				52205B6D21C7702600B12865 /* New Group */,
 				8418BD1821B102C10095892E /* Main */,
 				8418BD0321B0FD1F0095892E /* AppDelegate.swift */,
 				52AB19FA21C5692D0001BFDE /* SSLPersistentContainer.swift */,
@@ -211,6 +222,7 @@
 				52205B7221C7708100B12865 /* ItemsVC.swift in Sources */,
 				52AB19FB21C5692D0001BFDE /* SSLPersistentContainer.swift in Sources */,
 				84EDA22121B113B300724FB7 /* StoresVC.swift in Sources */,
+				52DE848721CB5FE2009EF111 /* ItemsAllTVC.swift in Sources */,
 				8418BD0421B0FD1F0095892E /* AppDelegate.swift in Sources */,
 				8418BD0C21B0FD1F0095892E /* Shared_Shopping_List.xcdatamodeld in Sources */,
 				8418BD2221B10CE90095892E /* StoreCell.swift in Sources */,

@@ -11,17 +11,6 @@ import CoreData
 
 class SSLPersistentContainer: NSPersistentContainer {
     
-    lazy var storeFetchedResultsController: NSFetchedResultsController<Store> = {
-        
-        let fetchRequest: NSFetchRequest<Store> = Store.fetchRequest()
-        
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        
-        return fetchedResultsController
-    }()
-    
     func getStoresFetchedResultsController() -> NSFetchedResultsController<Store> {
         let fetchRequest: NSFetchRequest<Store> = Store.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
@@ -29,9 +18,11 @@ class SSLPersistentContainer: NSPersistentContainer {
         return fetchedResultsController
     }
     
-    func getItemsFetchedResultsController(withRelationship parent: NSManagedObject) -> NSFetchedResultsController<Item> {
+    func getItemsFetchedResultsController(withRelationship parent: NSManagedObject? = nil) -> NSFetchedResultsController<Item> {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "ANY stores = %@", parent)
+        if let parent = parent {
+            fetchRequest.predicate = NSPredicate(format: "ANY stores = %@", parent)
+        }
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
         return fetchedResultsController
