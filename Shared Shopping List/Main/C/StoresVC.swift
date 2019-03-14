@@ -12,7 +12,7 @@ class StoresVC: UIViewController {
     
     // MARK: - IBActions
     @IBAction func btnActionAddStore(_ sender: Any) {
-        presentCreateSroreAlert()
+//        presentCreateSroreAlert()
     }
     
     // MARK: - View Life Cycle
@@ -55,11 +55,12 @@ extension StoresVC: UITableViewDelegate, UITableViewDataSource {
         }
         let store = fetchedResultController.object(at: indexPath)
         let cellTitle = store.title!
-        cell.configureCell(title: cellTitle)
+        let cellAddress = store.address
+        cell.configureCell(title: cellTitle, address: cellAddress)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let store = fetchedResultController.object(at: indexPath)
             store.managedObjectContext?.delete(store)
@@ -93,25 +94,6 @@ extension StoresVC: NSFetchedResultsControllerDelegate {
         default:
             print("...")
         }
-    }
-}
-
-//MARK: - Add Store
-extension StoresVC {
-    func presentCreateSroreAlert() {
-        let alert = UIAlertController(title: "Enter Store name", message: "", preferredStyle: .alert)
-        alert.addTextField { textField in
-            textField.placeholder = "Store name"
-        }
-        let createStore = UIAlertAction(title: "Create", style: .default) { [weak alert, unowned self] _ in
-            guard let alert = alert, let textFieldName = alert.textFields?.first else { return }
-            let title = textFieldName.text!
-            self.persistentContainer.createStore(title: title)
-        }
-        let dismissAlert = UIAlertAction(title: "Cancel", style: .cancel)
-        alert.addAction(dismissAlert)
-        alert.addAction(createStore)
-        self.present(alert, animated: true, completion: nil)
     }
 }
 

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		52205B7221C7708100B12865 /* ItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52205B7121C7708100B12865 /* ItemsVC.swift */; };
 		52205B7421C770DA00B12865 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52205B7321C770DA00B12865 /* ItemCell.swift */; };
+		522F69792232ABD800C4753A /* AddShopVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522F69782232ABD800C4753A /* AddShopVC.swift */; };
+		529974C0223A780B00D283C0 /* MockValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529974BF223A780B00D283C0 /* MockValues.swift */; };
 		52AB19FB21C5692D0001BFDE /* SSLPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AB19FA21C5692D0001BFDE /* SSLPersistentContainer.swift */; };
 		52DE848721CB5FE2009EF111 /* ItemsAllTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DE848621CB5FE2009EF111 /* ItemsAllTVC.swift */; };
 		8418BD0421B0FD1F0095892E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8418BD0321B0FD1F0095892E /* AppDelegate.swift */; };
@@ -23,6 +25,8 @@
 /* Begin PBXFileReference section */
 		52205B7121C7708100B12865 /* ItemsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsVC.swift; sourceTree = "<group>"; };
 		52205B7321C770DA00B12865 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		522F69782232ABD800C4753A /* AddShopVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddShopVC.swift; sourceTree = "<group>"; };
+		529974BF223A780B00D283C0 /* MockValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockValues.swift; sourceTree = "<group>"; };
 		52AB19FA21C5692D0001BFDE /* SSLPersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSLPersistentContainer.swift; sourceTree = "<group>"; };
 		52DE848621CB5FE2009EF111 /* ItemsAllTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsAllTVC.swift; sourceTree = "<group>"; };
 		8418BD0021B0FD1F0095892E /* Shared Shopping List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Shared Shopping List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +76,22 @@
 			path = V;
 			sourceTree = "<group>";
 		};
+		522F69762232ABA600C4753A /* AddShop */ = {
+			isa = PBXGroup;
+			children = (
+				522F69772232ABBB00C4753A /* C */,
+			);
+			path = AddShop;
+			sourceTree = "<group>";
+		};
+		522F69772232ABBB00C4753A /* C */ = {
+			isa = PBXGroup;
+			children = (
+				522F69782232ABD800C4753A /* AddShopVC.swift */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
 		52DE848421CB5F9E009EF111 /* ItemsAllList */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,11 +127,13 @@
 		8418BD0221B0FD1F0095892E /* Shared Shopping List */ = {
 			isa = PBXGroup;
 			children = (
+				522F69762232ABA600C4753A /* AddShop */,
 				52DE848421CB5F9E009EF111 /* ItemsAllList */,
 				52205B6E21C7702800B12865 /* ItemsList */,
 				8418BD1821B102C10095892E /* Main */,
 				8418BD0321B0FD1F0095892E /* AppDelegate.swift */,
 				52AB19FA21C5692D0001BFDE /* SSLPersistentContainer.swift */,
+				529974BF223A780B00D283C0 /* MockValues.swift */,
 				8418BD0721B0FD1F0095892E /* Main.storyboard */,
 				8418BD0D21B0FD1F0095892E /* Assets.xcassets */,
 				8418BD0F21B0FD1F0095892E /* LaunchScreen.storyboard */,
@@ -173,11 +195,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Guest account";
 				TargetAttributes = {
 					8418BCFF21B0FD1F0095892E = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -221,10 +244,12 @@
 				52205B7421C770DA00B12865 /* ItemCell.swift in Sources */,
 				52205B7221C7708100B12865 /* ItemsVC.swift in Sources */,
 				52AB19FB21C5692D0001BFDE /* SSLPersistentContainer.swift in Sources */,
+				529974C0223A780B00D283C0 /* MockValues.swift in Sources */,
 				84EDA22121B113B300724FB7 /* StoresVC.swift in Sources */,
 				52DE848721CB5FE2009EF111 /* ItemsAllTVC.swift in Sources */,
 				8418BD0421B0FD1F0095892E /* AppDelegate.swift in Sources */,
 				8418BD0C21B0FD1F0095892E /* Shared_Shopping_List.xcdatamodeld in Sources */,
+				522F69792232ABD800C4753A /* AddShopVC.swift in Sources */,
 				8418BD2221B10CE90095892E /* StoreCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +290,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -272,6 +298,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -322,6 +349,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -329,6 +357,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -369,7 +398,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "MyCompany.Shared-Shopping-List";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -385,7 +414,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "MyCompany.Shared-Shopping-List";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

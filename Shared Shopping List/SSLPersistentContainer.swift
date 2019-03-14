@@ -1,11 +1,3 @@
-//
-//  SSLPersistentContainer.swift
-//  Shared Shopping List
-//
-//  Created by Test on 12/15/18.
-//  Copyright © 2018 Guest account. All rights reserved.
-//
-
 import Foundation
 import CoreData
 
@@ -29,9 +21,10 @@ class SSLPersistentContainer: NSPersistentContainer {
     }
 
     
-    func createStore(title: String) {
+    func createStore(title: String, address: String?) {
         let store = Store(context: viewContext)
         store.title = title
+        if let address = address { store.address = address }
     }
     
     func createItem(title: String, store: Store) {
@@ -50,5 +43,27 @@ class SSLPersistentContainer: NSPersistentContainer {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    //MARK: - helper method for now
+    func fetchRecordForEntityWithTitle(_ entity: String, title: String) -> NSManagedObject {
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+        fetchRequest.predicate = NSPredicate(format: "title == %@", title)
+        
+        var result = [NSManagedObject]()
+        
+        do {
+            // Execute Fetch Request
+            let records = try viewContext.fetch(fetchRequest)
+            
+            if let records = records as? [NSManagedObject] {
+                result = records
+            }
+            
+        } catch {
+            print("Unable to fetch managed objects for entity \(entity).")
+        }
+        return result.first!
     }
 }
