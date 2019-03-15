@@ -56,7 +56,8 @@ extension StoresVC: UITableViewDataSource {
         let store = fetchedResultController.object(at: indexPath)
         let cellTitle = store.title!
         let cellAddress = store.address
-        cell.configureCell(title: cellTitle, address: cellAddress)
+        let cellItemsCount = store.items?.count
+        cell.configureCell(title: cellTitle, address: cellAddress, itemsCount: cellItemsCount)
         return cell
     }
     
@@ -98,6 +99,10 @@ extension StoresVC: NSFetchedResultsControllerDelegate {
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
             break;
+        case .update:
+            if let indexPath = indexPath {
+                tableView.reloadRows(at: [indexPath], with: .none)
+            }
         default:
             print("...")
         }

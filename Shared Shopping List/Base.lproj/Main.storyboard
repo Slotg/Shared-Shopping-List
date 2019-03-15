@@ -90,6 +90,12 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qnt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lic-8R-A4s">
+                                                    <rect key="frame" x="316.5" y="26" width="28.5" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="CFw-ft-QOq" firstAttribute="leading" secondItem="Lll-kg-xto" secondAttribute="leadingMargin" id="6tz-8b-g1g"/>
@@ -98,11 +104,15 @@
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FBX-Ba-AcD" secondAttribute="trailingMargin" id="LIf-KI-Ts4"/>
                                                 <constraint firstItem="FBX-Ba-AcD" firstAttribute="leading" secondItem="Lll-kg-xto" secondAttribute="leadingMargin" id="dEc-Zx-oVJ"/>
                                                 <constraint firstItem="CFw-ft-QOq" firstAttribute="top" secondItem="FBX-Ba-AcD" secondAttribute="bottom" constant="10" id="eA4-5I-6lx"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="lic-8R-A4s" secondAttribute="trailing" constant="15" id="eyG-fy-9IW"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="lic-8R-A4s" secondAttribute="bottom" constant="15" id="gWJ-4J-eRt"/>
+                                                <constraint firstItem="lic-8R-A4s" firstAttribute="top" secondItem="Lll-kg-xto" secondAttribute="topMargin" constant="15" id="h3G-LA-vtf"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="CFw-ft-QOq" secondAttribute="bottom" id="qih-EV-bUN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addressLabel" destination="CFw-ft-QOq" id="MGm-Oj-k1b"/>
+                                            <outlet property="itemsCountLabel" destination="lic-8R-A4s" id="65F-zI-CHq"/>
                                             <outlet property="titleLabel" destination="FBX-Ba-AcD" id="9Ux-vx-fJ6"/>
                                             <segue destination="uPQ-gG-Fjn" kind="show" identifier="ShowItemsList" id="13a-Qs-Irx"/>
                                         </connections>
