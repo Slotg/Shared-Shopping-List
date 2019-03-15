@@ -21,5 +21,7 @@ struct Mock {
         persistentContainer.createItem(title: "Water", store: store2)
         
         UserDefaults.standard.set(true, forKey: "MocksAreCreated")
+        
+        persistentContainer.save()
     }
 }

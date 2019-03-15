@@ -40,8 +40,8 @@ class StoresVC: UIViewController {
     }
 }
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
-extension StoresVC: UITableViewDelegate, UITableViewDataSource {
+// MARK: - UITableViewDataSource
+extension StoresVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let stores = fetchedResultController.fetchedObjects else {return 0}
@@ -51,7 +51,7 @@ extension StoresVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // TODO: - investigate ! removal options
         guard let cell = tableView.dequeueReusableCell(withIdentifier: StoreCell.reuseIdentifier, for: indexPath) as? StoreCell else {
-            fatalError("Unexpected Index Path")
+            fatalError("Unexpected Index Path or Reuse Identifier")
         }
         let store = fetchedResultController.object(at: indexPath)
         let cellTitle = store.title!
@@ -65,6 +65,13 @@ extension StoresVC: UITableViewDelegate, UITableViewDataSource {
             let store = fetchedResultController.object(at: indexPath)
             store.managedObjectContext?.delete(store)
         }
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension StoresVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
