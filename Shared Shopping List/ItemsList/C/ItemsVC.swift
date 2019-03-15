@@ -42,8 +42,8 @@ class ItemsVC: UIViewController {
     }
 }
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
-extension ItemsVC: UITableViewDelegate, UITableViewDataSource {
+// MARK: - UITableViewDataSource
+extension ItemsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let items = fetchedResultController.fetchedObjects else {return 0}
@@ -66,6 +66,11 @@ extension ItemsVC: UITableViewDelegate, UITableViewDataSource {
             item.managedObjectContext?.delete(item)
         }
     }
+}
+
+// MARK: - UITableViewDelegate
+extension ItemsVC: UITableViewDelegate {
+
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
