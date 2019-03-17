@@ -202,6 +202,7 @@
                                         <connections>
                                             <outlet property="itemsCountLabel" destination="9DC-dh-bHO" id="06V-zY-8vh"/>
                                             <outlet property="titleLabel" destination="LdN-Mi-V0E" id="B9Q-3M-wz0"/>
+                                            <segue destination="uPQ-gG-Fjn" kind="show" identifier="ShowItemsList" id="uax-ig-VL1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -356,7 +357,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fIH-6F-8eC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1460" y="-1045"/>
+            <point key="canvasLocation" x="1542" y="-58"/>
         </scene>
         <!--Add ShopVC-->
         <scene sceneID="AhP-3r-cUZ">
@@ -439,7 +440,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3M6-5C-E8D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1460" y="-346"/>
+            <point key="canvasLocation" x="1542" y="-758"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="uax-ig-VL1"/>
+    </inferredMetricsTieBreakers>
 </document>

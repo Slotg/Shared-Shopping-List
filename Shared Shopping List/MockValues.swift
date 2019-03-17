@@ -12,12 +12,15 @@ struct Mock {
         persistentContainer.createStore(title: "Empty Store", address: "666 st, Iceland")
         persistentContainer.createStore(title: "Broccoli Emporium", address: "Vegan ave, Greenland")
         
-        persistentContainer.createCategory(title: "Food")
-        persistentContainer.createCategory(title: "Not Food")
-        
         let store1 = persistentContainer.fetchRecordForEntityWithTitle("Store", title: "Vegetable store") as! Store
         let store2 = persistentContainer.fetchRecordForEntityWithTitle("Store", title: "General Goods") as! Store
         let store3 = persistentContainer.fetchRecordForEntityWithTitle("Store", title: "Broccoli Emporium") as! Store
+        
+        persistentContainer.createCategory(title: "Food")
+        persistentContainer.createCategory(title: "Not Food")
+        
+        let category1 = persistentContainer.fetchRecordForEntityWithTitle("Category", title: "Food") as! Category
+        let category2 = persistentContainer.fetchRecordForEntityWithTitle("Category", title: "Not Food") as! Category
         
         persistentContainer.createItem(title: "Broccoli", store: store1)
         persistentContainer.createItem(title: "Apple", store: store1)
@@ -27,7 +30,18 @@ struct Mock {
         persistentContainer.createItem(title: "Water", store: store2)
         
         let broccoli = persistentContainer.fetchRecordForEntityWithTitle("Item", title: "Broccoli") as! Item
+        let apple = persistentContainer.fetchRecordForEntityWithTitle("Item", title: "Apple") as! Item
+        let beetroot = persistentContainer.fetchRecordForEntityWithTitle("Item", title: "Beetroot") as! Item
+        
         broccoli.addToStores(store3)
+        broccoli.addToCategories(category1)
+        apple.addToCategories(category1)
+        beetroot.addToCategories(category1)
+        
+        let paperTowel = persistentContainer.fetchRecordForEntityWithTitle("Item", title: "Paper towels") as! Item
+        let water = persistentContainer.fetchRecordForEntityWithTitle("Item", title: "Water") as! Item
+        paperTowel.addToCategories(category2)
+        water.addToCategories(category2)
         
         UserDefaults.standard.set(true, forKey: "MocksAreCreated")
         

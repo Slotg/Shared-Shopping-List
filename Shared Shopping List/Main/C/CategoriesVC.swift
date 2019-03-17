@@ -102,13 +102,13 @@ extension CetegoriesVC: NSFetchedResultsControllerDelegate {
     }
 }
 
-// MARK: - Navigation
-//extension CetegoriesVC {
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "ShowItemsList" {
-//            guard let storeIndexPath = tableView.indexPathForSelectedRow else {return}
-//            let destination = segue.destination as? ItemsVC
-//            destination?.itemsCategory = fetchedResultController.object(at: storeIndexPath)
-//        }
-//    }
-//}
+//MARK: - Navigation
+extension CetegoriesVC {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowItemsList" {
+            guard let storeIndexPath = tableView.indexPathForSelectedRow else {return}
+            let destination = segue.destination as? ItemsVC
+            destination?.itemsCategory = fetchedResultController.object(at: storeIndexPath)
+        }
+    }
+}

@@ -5,7 +5,7 @@ class ItemsVC: UIViewController {
     
     // MARK: - Properties
     //protocol?
-    var itemsCategory: Store?
+    var itemsCategory: NSManagedObject?
     private let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     private lazy var fetchedResultController = persistentContainer.getItemsFetchedResultsController(withRelationship: itemsCategory!)
     
@@ -112,7 +112,14 @@ extension ItemsVC {
         let createStore = UIAlertAction(title: "Create", style: .default) { [weak alert, unowned self] _ in
             guard let alert = alert, let textFieldName = alert.textFields?.first else { return }
             let title = textFieldName.text!
-            self.persistentContainer.createItem(title: title, store: self.itemsCategory!)
+            //TODO: - temporary bad solution
+            if let store = self.itemsCategory as? Store {
+                self.persistentContainer.createItem(title: title, store: store)
+            }
+            if let category = self.itemsCategory as? Category {
+                self.persistentContainer.createItem(title: title, category: category)
+            }
+            
         }
         let dismissAlert = UIAlertAction(title: "Cancel", style: .cancel)
         alert.addAction(dismissAlert)
