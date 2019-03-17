@@ -1,11 +1,11 @@
 import UIKit
 import CoreData
 
-class StoresVC: UIViewController {
+class CetegoriesVC: UIViewController {
     
     // MARK: - Properties
     private let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-    private lazy var fetchedResultController = persistentContainer.getStoresFetchedResultsController()
+    private lazy var fetchedResultController = persistentContainer.getCategoriesFetchedResultsController()
     
     // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
@@ -36,42 +36,41 @@ class StoresVC: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension StoresVC: UITableViewDataSource {
+extension CetegoriesVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let stores = fetchedResultController.fetchedObjects else {return 0}
-        return stores.count
+        guard let categories = fetchedResultController.fetchedObjects else {return 0}
+        return categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: StoreCell.reuseIdentifier, for: indexPath) as? StoreCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryCell.reuseIdentifier, for: indexPath) as? CategoryCell else {
             fatalError("Unexpected Index Path or Reuse Identifier")
         }
-        let store = fetchedResultController.object(at: indexPath)
-        let cellTitle = store.title!
-        let cellAddress = store.address
-        let cellItemsCount = store.items?.count
-        cell.configureCell(title: cellTitle, address: cellAddress, itemsCount: cellItemsCount)
+        let category = fetchedResultController.object(at: indexPath)
+        let cellTitle = category.title!
+        let cellItemsCount = category.items?.count
+        cell.configureCell(title: cellTitle, itemsCount: cellItemsCount)
         return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let store = fetchedResultController.object(at: indexPath)
-            store.managedObjectContext?.delete(store)
+            let category = fetchedResultController.object(at: indexPath)
+            category.managedObjectContext?.delete(category)
         }
     }
 }
 
 // MARK: - UITableViewDelegate
-extension StoresVC: UITableViewDelegate {
+extension CetegoriesVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
-extension StoresVC: NSFetchedResultsControllerDelegate {
+extension CetegoriesVC: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
@@ -104,12 +103,12 @@ extension StoresVC: NSFetchedResultsControllerDelegate {
 }
 
 // MARK: - Navigation
-extension StoresVC {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowItemsList" {
-            guard let storeIndexPath = tableView.indexPathForSelectedRow else {return}
-            let destination = segue.destination as? ItemsVC
-            destination?.itemsCategory = fetchedResultController.object(at: storeIndexPath)
-        }
-    }
-}
+//extension CetegoriesVC {
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "ShowItemsList" {
+//            guard let storeIndexPath = tableView.indexPathForSelectedRow else {return}
+//            let destination = segue.destination as? ItemsVC
+//            destination?.itemsCategory = fetchedResultController.object(at: storeIndexPath)
+//        }
+//    }
+//}

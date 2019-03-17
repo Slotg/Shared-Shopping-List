@@ -10,6 +10,13 @@ class SSLPersistentContainer: NSPersistentContainer {
         return fetchedResultsController
     }
     
+    func getCategoriesFetchedResultsController() -> NSFetchedResultsController<Category> {
+        let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchedResultsController
+    }
+    
     func getItemsFetchedResultsController(withRelationship parent: NSManagedObject? = nil) -> NSFetchedResultsController<Item> {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         if let parent = parent {
@@ -25,6 +32,11 @@ class SSLPersistentContainer: NSPersistentContainer {
         let store = Store(context: viewContext)
         store.title = title
         if let address = address { store.address = address }
+    }
+    
+    func createCategory(title: String) {
+        let category = Category(context: viewContext)
+        category.title = title
     }
     
     func createItem(title: String, store: Store) {

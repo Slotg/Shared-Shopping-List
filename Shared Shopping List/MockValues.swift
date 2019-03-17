@@ -12,6 +12,9 @@ struct Mock {
         persistentContainer.createStore(title: "Empty Store", address: "666 st, Iceland")
         persistentContainer.createStore(title: "Broccoli Emporium", address: "Vegan ave, Greenland")
         
+        persistentContainer.createCategory(title: "Food")
+        persistentContainer.createCategory(title: "Not Food")
+        
         let store1 = persistentContainer.fetchRecordForEntityWithTitle("Store", title: "Vegetable store") as! Store
         let store2 = persistentContainer.fetchRecordForEntityWithTitle("Store", title: "General Goods") as! Store
         let store3 = persistentContainer.fetchRecordForEntityWithTitle("Store", title: "Broccoli Emporium") as! Store
