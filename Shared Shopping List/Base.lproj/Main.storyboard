@@ -63,7 +63,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="btnActionAddStore:" destination="Rw6-c2-vUR" eventType="touchUpInside" id="AfM-eH-pul"/>
                                     <segue destination="ksN-aN-i3S" kind="show" id="hdd-Fk-DgH"/>
                                 </connections>
                             </button>
@@ -444,6 +443,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uax-ig-VL1"/>
+        <segue reference="13a-Qs-Irx"/>
     </inferredMetricsTieBreakers>
 </document>
