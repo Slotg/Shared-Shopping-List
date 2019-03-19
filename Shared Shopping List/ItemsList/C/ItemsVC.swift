@@ -3,9 +3,6 @@ import CoreData
 
 class ItemsVC: UIViewController {
     
-    //TODO: - hide emtpy Done header
-    //TODO: - crash on deleting done
-    
     // MARK: - Properties
     //protocol?
     var itemsCategory: NSManagedObject?
@@ -154,6 +151,15 @@ extension ItemsVC: UITableViewDelegate {
             }
         default:
             return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        switch indexPath.section {
+        case 0:
+            return .delete
+        default:
+            return .none
         }
     }
 }
