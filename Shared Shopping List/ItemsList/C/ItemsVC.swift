@@ -4,7 +4,7 @@ import CoreData
 class ItemsVC: UIViewController {
     
     //TODO: - hide emtpy Done header
-    //TODO: - new Done cell
+    //TODO: - crash on deleting done
     
     // MARK: - Properties
     //protocol?
@@ -92,7 +92,7 @@ extension ItemsVC: UITableViewDataSource {
         case 1:
             let item = doneItems[indexPath.row]
             let cellTitle = item.title!
-            cell.configureCell(title: cellTitle)
+            cell.configureCell(title: cellTitle, isDone: true)
             return cell
         default:
             return cell
