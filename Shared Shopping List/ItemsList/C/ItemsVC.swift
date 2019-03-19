@@ -142,7 +142,19 @@ extension ItemsVC: UITableViewDelegate {
         default:
             return 50
         }
-        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 1:
+            if doneItems.count > 0 {
+                return 25
+            } else {
+                return 0
+            }
+        default:
+            return 0
+        }
     }
 }
 
