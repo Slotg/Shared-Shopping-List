@@ -1,6 +1,6 @@
 import UIKit
 import CoreData
-
+//MARK: - temporary cotroller
 class ItemsAllTVC: UITableViewController {
     
     private let persistentContainer = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
@@ -25,7 +25,7 @@ class ItemsAllTVC: UITableViewController {
     }
 }
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
+// MARK: - UITableViewDataSource
 extension ItemsAllTVC {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

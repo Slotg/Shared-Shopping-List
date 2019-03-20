@@ -44,6 +44,7 @@ class SSLPersistentContainer: NSPersistentContainer {
         category.title = title
     }
     
+    //TODO: - abstract
     func createItem(title: String, store: Store) {
         let item = Item(context: viewContext)
         item.title = title
@@ -54,6 +55,17 @@ class SSLPersistentContainer: NSPersistentContainer {
         let item = Item(context: viewContext)
         item.title = title
         item.addToCategories(category)
+    }
+    
+    func createItem(title: String, stores: [Store] = [], categories: [Category] = []) {
+        let item = Item(context: viewContext)
+        item.title = title
+        for store in stores {
+            item.addToStores(store)
+        }
+        for category in categories {
+            item.addToCategories(category)
+        }
     }
     
     func save() {

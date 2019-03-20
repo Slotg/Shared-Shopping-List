@@ -15,7 +15,7 @@ class ItemsVC: UIViewController {
     
     // MARK: - IBActions
     @IBAction func btnActionAddItem(_ sender: Any) {
-        presentCreateItemAlert()
+//        presentCreateItemAlert()
     }
 
     // MARK: - View Life Cycle
@@ -193,37 +193,51 @@ extension ItemsVC: NSFetchedResultsControllerDelegate {
     }
 }
 
-//MARK: - Add Item
-extension ItemsVC {
-    func presentCreateItemAlert() {
-        let alert = UIAlertController(title: "Enter Item name", message: "", preferredStyle: .alert)
-        alert.addTextField { textField in
-            textField.placeholder = "Item name"
-        }
-        let createStore = UIAlertAction(title: "Create", style: .default) { [weak alert, unowned self] _ in
-            guard let alert = alert, let textFieldName = alert.textFields?.first else { return }
-            let title = textFieldName.text!
-            //TODO: - temporary bad solution
-            if let store = self.itemsCategory as? Store {
-                self.persistentContainer.createItem(title: title, store: store)
-            }
-            if let category = self.itemsCategory as? Category {
-                self.persistentContainer.createItem(title: title, category: category)
-            }
-            
-        }
-        let dismissAlert = UIAlertAction(title: "Cancel", style: .cancel)
-        alert.addAction(dismissAlert)
-        alert.addAction(createStore)
-        self.present(alert, animated: true, completion: nil)
-    }
-}
+////MARK: - Add Item
+//extension ItemsVC {
+//    func presentCreateItemAlert() {
+//        let alert = UIAlertController(title: "Enter Item name", message: "", preferredStyle: .alert)
+//        alert.addTextField { textField in
+//            textField.placeholder = "Item name"
+//        }
+//        let createStore = UIAlertAction(title: "Create", style: .default) { [weak alert, unowned self] _ in
+//            guard let alert = alert, let textFieldName = alert.textFields?.first else { return }
+//            let title = textFieldName.text!
+//            //TODO: - temporary bad solution
+//            if let store = self.itemsCategory as? Store {
+//                self.persistentContainer.createItem(title: title, store: store)
+//            }
+//            if let category = self.itemsCategory as? Category {
+//                self.persistentContainer.createItem(title: title, category: category)
+//            }
+//
+//        }
+//        let dismissAlert = UIAlertAction(title: "Cancel", style: .cancel)
+//        alert.addAction(dismissAlert)
+//        alert.addAction(createStore)
+//        self.present(alert, animated: true, completion: nil)
+//    }
+//}
 
 //MARK: - Delete done items
 extension ItemsVC {
     func deleteDoneItems() {
         for item in doneItems {
             item.managedObjectContext?.delete(item)
+        }
+    }
+}
+
+extension ItemsVC {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowAddItemVC" {
+            let destination = segue.destination as? AddItemVC
+            if let store = self.itemsCategory as? Store {
+                destination?.stores.append(store)
+            }
+            if let category = self.itemsCategory as? Category {
+                destination?.categories.append(category)
+            }
         }
     }
 }
